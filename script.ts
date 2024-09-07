@@ -135,13 +135,18 @@ getEmployee(myDetails);
 
 // classes : They act as a structure of objects and also have functionality and methods unlike interfaces
 class Pendrive {
-  name: string;
-  price: number;
+  public name: string; //property of class
+  private price: number; //property of class
   constructor(name: string, price: number) {
     this.name = name;
     this.price = price;
   }
-   
+  getName() {
+    console.log(this.name);
+  }
 }
 
-const p1 = new Pendrive();
+const p1 = new Pendrive("Sandisk", 500);
+//Access Modifier (of Properties/Methods) : 1. Public - Can be used anywhere 2. Private - Can only be used inside the class 3. Can only be used in the class or extended class
+p1.name = "HP";
+p1.price = 2000 //ERROR : private properties cant be modified outside the class, not even in extended class
