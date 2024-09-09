@@ -141,12 +141,98 @@ class Pendrive {
     this.name = name;
     this.price = price;
   }
-  getName() {
-    console.log(this.name);
+  getNameAndPrice() {
+    console.log(this.name + this.price);
   }
 }
 
 const p1 = new Pendrive("Sandisk", 500);
 //Access Modifier (of Properties/Methods) : 1. Public - Can be used anywhere 2. Private - Can only be used inside the class 3. Can only be used in the class or extended class
 p1.name = "HP";
-p1.price = 2000 //ERROR : private properties cant be modified outside the class, not even in extended class
+// p1.price = 2000 //ERROR : private properties cant be modified outside the class, not even in extended class
+
+class Phone {
+  private owner = "Dikshant Kanela"
+  protected name = "iPhone 15 Pro Max"; // = ka matlab value dena : ka matlab type batana
+  public cost = 150000;
+  private getNameAndCost() {
+    console.log(this.name + this.cost);
+  }
+}
+
+class CellPhone extends Phone{
+  protected city = "Delhi";
+  getCity(){
+    console.log(this.name) //is accessible in extended class
+  }
+
+}
+
+// ** Readonly Modifier - once applied you can onlhy use it for assigning in constructor and cannot modify it outside the class and even in any method of the class! **
+class Bike{
+ public name:string;
+ public brand:string;
+ public cost:number;
+ public readonly discount:number;
+
+  constructor(name:string,brand:string,cost:number,discount:number){
+     this.name = name;
+     this.brand = brand;
+     this.cost = cost;  //lhs are the properties of the class
+     this.discount = discount //rhs are the parameter names of constructor!
+  }
+  
+  getDiscount(){
+    // console.log(this.discount)
+    this.discount = 1212 //NOT ALLOWED 
+  }
+
+}
+
+//get : Allows to access (log) the propety like an object property but is actually a method
+//set   Allows to access (log) the propety like an object property but is actually a method
+
+class Food{
+  public name:string;
+  public meal:string;
+
+  constructor(name:string,meal:string){
+    this.name = name;
+    if(meal === "veg" || "non-veg"){
+      this.meal = meal;
+    }
+    else{
+      throw Error("Meal can only be veg or non-veg");
+    }
+    
+  }
+ 
+  get food(){
+    return this.name; //returns/logs the name property like an object
+  }
+  
+  set food(meal:string){
+    this.meal = meal; //used to modofy the name property like an object
+  }
+}
+
+const favFood = new Food("Panner","Veg")
+console.log(favFood.food); //getter
+favFood.name = "Cholle Bhature"; //setter
+
+//Literal types : Keep the type as a specific value!!
+
+let dikshantIsAwesome:true;
+// dikshantIsAwesome = false //error
+
+let car:"VW" | "Skoda"
+car = "Skoda";
+car = "VW";
+// car = "Maruti" // error
+
+//spread operator inside function params : 
+function pqrs(name:string,...others:string[]){
+   console.log(others) //an array => [Aryan,Aman,Shubham]
+}
+
+pqrs("Dikshant","Aryan","Aman","Shubham")
